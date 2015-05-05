@@ -6,7 +6,30 @@
   <meta charset="UTF-8">
   <title>ME</title>
 
+<script type="text/javascript">
 
+	var _format = function(value){
+		
+		return value<=9?'0'+value:value;
+		
+	}
+	// onload="_showTime()" 表示页面加载事件，促发时间是页面内容全部加载完毕之后去调用
+	var _showTime = function(){
+		var now = new Date();//new Date()获得的是当前的时间
+		var nowStr = '当前时间：';
+		nowStr += now.getFullYear()+'年';
+		nowStr += _format(now.getMonth()+1)+'月';
+		nowStr += _format(now.getDate())+'日 ';
+		nowStr += _format(now.getHours())+':';
+		nowStr += _format(now.getMinutes())+':';
+		nowStr += _format(now.getSeconds())+' 星期';
+		nowStr += '日一二三四五六'.substr(now.getDay(),1);
+		document.getElementById('now').innerHTML = nowStr;
+		
+		setTimeout(_showTime,1000);//1000毫秒之后再去执行_showTime方法   递归
+	}
+	
+</script>
   <style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 
@@ -479,7 +502,8 @@ p {
   <script src="js/modernizr.js"></script>
 
 </head>
-<body>
+<body onload="_showTime()">
+<div style="float:left;width:auto;"><span id="now">2013-1-1 sdf:sdf:SDf</span></div>
 <div style="text-align:center;clear:both;margin-top:30px">  
 <embed src="music/Warning.mp3" width=200 height=50 type=audio/mpeg loop="true" autostart="true"> </embed>
 </div>
